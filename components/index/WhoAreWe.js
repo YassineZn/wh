@@ -16,7 +16,7 @@ import { useCallback } from "react";
 import { useEffect } from "react";
 import Stats from "../widgets/Stats";
 
-const WhoAreWe = () => {
+const WhoAreWe = ({ isTitleHidden }) => {
   const router = useRouter();
   const { t } = useTranslation("whoAreWe");
 
@@ -31,7 +31,7 @@ const WhoAreWe = () => {
         "بدأ نشاط الشركة مقتصرا على الاستيراد من سورسرا وكوريا اوربا.ثم تطور العمل إلى الفرز المباشر والتصدير.ثم إلى عمليات التجميع والفرز والتصدير.",
       descEN:
         "The company's activity began with imports from Sursera and Korea Europe. Then the work developed to direct sorting and export. Then to assembly operations, sorting and export.",
-      img: "/images/whoAreWe/google.png",
+      img: "/icons/logo.webp",
     },
     {
       titleAr: "مراحل التوسع في الوطن العربي",
@@ -40,7 +40,7 @@ const WhoAreWe = () => {
         "بدأ السيد وليد الشريفي رئيس مجلس الإدارة بتوسيع نشاطات الشركة خارج نطاق الوطن العربي فكانت أول وجهة له هي الجمهورية التركية عام 2017م ابتداءً من مدينة اسطنبول التاريخية وانتهاءً بعموم محافظات الدولة، ليمتد نشاط المرحلة الأولى: الجمهورية اليمنية (مكان التأسيس الأول).\nالمرحلة الثانية: المملكة العربية السعودية ابتداءً من مدينة جدة.\nالمرحلة الثالثة: الإمارات العربية المتحدة ابتداءً من إمارة دبي.\nالمرحلة الرابعة: سلطنة عمان وملكة البحرين ودولة الكويت وقطر.",
       descEN:
         "The company's activity began with imports from Sursera and Korea Europe. Then the work developed to direct sorting and export. Then to assembly operations, sorting and export.",
-      img: "/images/whoAreWe/google.png",
+      img: "/icons/logo.webp",
     },
     {
       titleAr: "مراحل التوسع خارج الوطن العربي",
@@ -49,7 +49,7 @@ const WhoAreWe = () => {
         "بدأ السيد وليد الشريفي رئيس مجلس الإدارة بتوسيع نشاطات الشركة خارج نطاق الوطن العربي فكانت أول وجهة له هي الجمهورية التركية عام 2017م ابتداءً من مدينة اسطنبول التاريخية وانتهاءً بعموم محافظات الدولة، ليمتد نشاط شركة (WH INTERNATIONAL GROUP) إلى أبعد مدى لتحقيق الأهداف الاستراتيجية والغايات النبيلة للشركة التي تتسم مع بناء التنمية المستدامة للأجيال القادمة.",
       descEN:
         "The company's activity began with imports from Sursera and Korea Europe. Then the work developed to direct sorting and export. Then to assembly operations, sorting and export.",
-      img: "/images/whoAreWe/google.png",
+      img: "/icons/logo.webp",
     },
   ];
   const STEPS = [
@@ -74,6 +74,9 @@ const WhoAreWe = () => {
   const updateIndex = useCallback(() => {
     setActiveStep(swiperRef.current.swiper.realIndex);
   }, []);
+  // useEffect(() => {
+  //   swiperRef.current.swiper.slideTo(activeStep);
+  // }, [activeStep]);
 
   useEffect(() => {
     const swiperInstance = swiperRef.current.swiper;
@@ -90,29 +93,40 @@ const WhoAreWe = () => {
   }, [updateIndex]);
 
   return (
-    <section className="my-container">
+    <section key={router.locale} className="my-container">
       <div>
-        <div className="f-ai-c gap-3">
-          <div className="h-12 w-1 rounded-full bg-primary-400"></div>
-          <h2 className="text-4xl font-bold">{t("h2")}</h2>
-        </div>
+        {!isTitleHidden && (
+          <div className="f-ai-c mx-auto mb-10 w-fit flex-col justify-center gap-2">
+            <h2 className="text-center text-3xl font-bold md:text-4xl">{t("h2")}</h2>
+            <div className="h-1 w-full rounded-full bg-primary-400"></div>
+          </div>
+        )}
 
-        <div className="f-ai-c relative mb-12 mt-4 w-fit">
+        <div
+          className="f-ai-c relative mx-auto  w-fit"
+          style={{
+            width: "min(800px, 100%)",
+          }}
+        >
           <div
             className="absolute rounded-t-sm border-b-2 border-primary-400 bg-zinc-100 transition-all"
             style={{
-              inset: "0",
+              height: "100%",
               width: `33.33%`,
-              left: `${activeStep * 33.33}%`,
+              left: `${router.locale != "ar" ? activeStep * 33.33 : "unset"}%`,
+              right: `${router.locale == "ar" ? activeStep * 33.33 : "unset"}%`,
             }}
           />
           {STEPS.map(({ titleAr, titleEn, Icon }, i) => (
             <button
               key={i}
-              className={`f-ai-c w-48 justify-center gap-2 border-b-2 border-gray-200 py-3 transition-all ${
+              className={`f-ai-c w-32 justify-center gap-2 border-b-2 border-gray-200 py-3 transition-all md:w-48 lg:w-full ${
                 i === activeStep ? "text-primary-400" : " text-zinc-600"
               }`}
-              onClick={() => swiperRef.current.swiper.slideTo(i)}
+              onClick={() => {
+                swiperRef.current.swiper.slideTo(i === 0 ? 1 : i === 1 ? 2 : 0);
+                setActiveStep(i);
+              }}
             >
               <Icon className="z-10" />
               <h3 className="z-10 text-xl font-semibold ">{router.locale === "ar" ? titleAr : titleEn}</h3>
@@ -127,31 +141,30 @@ const WhoAreWe = () => {
         </div>
       </div>
       <Swiper
-        spaceBetween={100}
         ref={swiperRef}
-        slidesPerView={"auto"}
+        slidesPerView={1}
+        centeredSlides={true}
         grabCursor={true}
         loop={true}
         modules={[Autoplay]}
         autoplay={{
           delay: 8000,
         }}
-        className={`whoAreWe-swiper `}
-        key={router.locale}
+        className={`whoAreWe-swiper mt-20`}
       >
         {CONTENT.map(({ titleAr, titleEn, descAr, descEN, img }, i) => (
           <SwiperSlide key={i}>
-            <div className="f-ai-c gap-4">
-              <ImagePlaceholder
+            <div className="f-ai-c flex-wrap justify-center gap-20 md:flex-nowrap lg:gap-28">
+              <Image
                 src={img}
                 alt={router.locale === "ar" ? titleAr : titleEn}
                 width={300}
                 height={300}
-                className="cursor-pointer object-contain  transition-all duration-300 hover:scale-105 hover:grayscale-0"
+                className="object-contain"
               />
               <div className="max-w-[40rem]">
-                <h4 className="text-2xl font-bold">{router.locale === "ar" ? titleAr : titleEn}</h4>
-                <p className="mt-4 text-lg opacity-90 ">{router.locale === "ar" ? descAr : descEN}</p>
+                <h4 className="text-center text-2xl font-bold">{router.locale === "ar" ? titleAr : titleEn}</h4>
+                <p className="mt-4 text-center text-lg opacity-90">{router.locale === "ar" ? descAr : descEN}</p>
               </div>
             </div>
           </SwiperSlide>

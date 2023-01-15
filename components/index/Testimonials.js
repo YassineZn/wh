@@ -11,7 +11,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ArrowLong from "../../public/icons/components/ArrowLong";
 import { useRouter } from "next/router";
 const Testimonials = () => {
-  const figures = [
+  const router = useRouter();
+
+  let figures = [
     {
       author: "Alena Pale.",
       text: "I Am Very Happy To Come, I Get Very Good Service With Very Friendly Doctor. I Am Very Happy To Come",
@@ -38,9 +40,36 @@ const Testimonials = () => {
     },
   ];
 
+  if (router.locale == "ar")
+    figures = [
+      {
+        author: "Alena Pale.",
+        text: "أنا سعيد جدا للوصول إلى طبيبي، أحصل على خدمة جيدة جدا مع طبيب متعاون جدا. أنا سعيد جدا للوصول إلى طبيبي",
+        company: "جوجل",
+        industry: "الرعاية الصحية",
+        rating: 5,
+        image: "/icons/testimonials/bos.png",
+      },
+      {
+        author: "Henrieta U.",
+        text: "ما كنت أبحث عنه. أنا راضٍ جدا عن طبيبي. أنا سعيد جدا للوصول إلى طبيبي",
+        company: "جوجل",
+        industry: "الرعاية الصحية",
+        rating: 4,
+        image: "/icons/testimonials/google.png",
+      },
+      {
+        author: "Abraham M.",
+        text: "طبيب هو المورد الأكثر قيمة للأعمال التي قمنا بشرائها أي وقت مضى. أنا سعيد جدا للوصول إلى طبيبي",
+        company: "جوجل",
+        industry: "الرعاية الصحية",
+        rating: 5,
+        image: "/icons/testimonials/bos.png",
+      },
+    ];
+
   const swiperRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const router = useRouter();
 
   const updateIndex = useCallback(() => {
     setCurrentIndex(swiperRef.current.swiper.realIndex);
@@ -61,7 +90,7 @@ const Testimonials = () => {
     };
   }, [updateIndex]);
   return (
-    <section key={router.locale}>
+    <section className="my-8 md:my-10 lg:my-16" key={router.locale}>
       <div className="swiper-container">
         <Swiper
           ref={swiperRef}
@@ -86,7 +115,7 @@ const Testimonials = () => {
             ))}
         </Swiper>
         <button
-          className="btn-next hidden md:block"
+          className="btn-next hidden md:flex"
           onClick={() => {
             swiperRef && swiperRef.current.swiper.slideNext();
           }}
@@ -103,7 +132,6 @@ const Testimonials = () => {
 
       <style jsx>{`
         section {
-          margin-top: 8rem;
           background-color: var(--secondary-400);
           color: white;
           padding: 4rem 2rem;
@@ -134,7 +162,6 @@ const Testimonials = () => {
           background-color: #fff;
           overflow: hidden;
           transition: all 0.25s ease-in-out;
-          display: flex;
           align-items: center;
           justify-content: center;
           border: none;
@@ -197,9 +224,9 @@ const Testimonial = ({ figure }) => {
 
           blockquote::before {
             position: absolute;
-            left: ${(router.locale = "ar" ? "unset" : "-1.5rem")};
-            right: ${(router.locale = "ar" ? "-1.5rem" : "unset")};
-            transform: ${(router.locale = "ar" ? "rotate(180deg)" : "rotate(0deg)")};
+            left: ${router.locale == "ar" ? "unset" : "-2.5rem"};
+            right: ${router.locale == "ar" ? "-2.5rem" : "unset"};
+            transform: ${router.locale == "ar" ? "rotate(180deg)" : "rotate(0deg)"};
             background-image: url("data:image/svg+xml,%3Csvg fill='none' height='31' viewBox='0 0 33 31' width='33' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m32.4 24.1002c0-3.7-2.5-6-6.3-6h-2c.3-7.2 4.1-10.5 8.8-11.30001v-6.599995c-9.3.999995-14.3 7.499995-14.3 18.400005 0 8.6 2.9 11.7 7.5 11.7 3.9 0 6.3-2.7 6.3-6.2zm-18.5 0c0-3.7-2.5-6-6.29999-6h-2c.3-7.2 4.1-10.5 8.79999-11.30001v-6.599995c-9.29999.999995-14.299994 7.499995-14.299994 18.400005 0 8.6 2.900004 11.7 7.500004 11.7 3.89999 0 6.29999-2.7 6.29999-6.2z' fill='%23ccb260'/%3E%3C/svg%3E");
             content: "";
             display: block;

@@ -21,10 +21,10 @@ export default function Home() {
   );
 }
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["hero", "whoAreWe", "stats", "news", "videos"])),
+      ...(await serverSideTranslations(locale, ["hero", "whoAreWe", "stats", "news", "videos", "footer"])),
     },
   };
 }

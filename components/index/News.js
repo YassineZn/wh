@@ -46,12 +46,11 @@ const News = () => {
   ];
   return (
     <section className="my-container">
-      <div className="f-ai-c justify-between">
-        <h2 className="text-4xl font-bold">{t("h2")}</h2>
-        <Link href="/news" className="cta">
-          {t("see-all")}
-        </Link>
+      <div className="mx-auto mb-10 flex w-fit flex-col gap-2">
+        <h2 className="text-center text-3xl font-bold md:text-4xl">{t("h2")}</h2>
+        <div className="h-1 w-full rounded-full bg-primary-400"></div>
       </div>
+
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         {news.map(({ titleEn, titleAr, descriptionEn, descriptionAr, image, date, link }, i) => (
           <div key={i} className="rounded-md bg-white  shadow-md">
@@ -69,6 +68,10 @@ const News = () => {
           </div>
         ))}
       </div>
+
+      <Link href="/news" className="cta mx-auto mt-8 block w-fit text-center ">
+        {t("see-all")}
+      </Link>
     </section>
   );
 };

@@ -1,199 +1,106 @@
+import { useTranslation } from "next-i18next";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import {
+  RiMapPinLine,
+  RiPhoneLine,
+  RiMailSendLine,
+  RiFacebookLine,
+  RiTwitterLine,
+  RiYoutubeLine,
+} from "react-icons/ri";
+import { NAV_ITEMS } from "../../util/consts";
 
 const Footer = () => {
   const router = useRouter();
+  const { t } = useTranslation("footer");
   return (
-    <footer class="body-font bg-secondary-400 text-white">
-      <div class="my-container  mx-auto flex flex-col flex-wrap px-5 py-24 md:flex-row md:flex-nowrap md:items-center lg:items-start">
-        <div class="mx-auto w-64 flex-shrink-0 text-center md:mx-0 md:text-left">
-          <Link href="#" class="title-font flex items-center justify-center font-medium text-white md:justify-start">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              class="h-10 w-10 rounded-full bg-indigo-500 p-2 text-white"
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
-            <span class="ml-3 text-xl">Wh International</span>
+    <footer dir={router.locale === "ar" ? "rtl" : "ltr"} className="body-font bg-secondary-400 text-white">
+      <div className="my-container mx-auto flex flex-col flex-wrap items-center justify-center gap-10 px-5 py-24 text-center md:flex-nowrap md:gap-20 lg:flex-row lg:text-start">
+        <div className="mx-auto max-w-[25rem] flex-shrink-0 text-center md:mx-0 md:text-left">
+          <Link href="#">
+            <Image src="/icons/logo.webp" width={250} height={250} alt="wh international" className="mx-auto" />
           </Link>
-          <p class="mt-2 text-sm text-white">Air plant banjo lyft occupy retro adaptogen indego</p>
+          <p className="mt-4 text-center text-white/90">{t("p")}</p>
+          <ul className="mt-4 flex justify-center gap-4 text-2xl ">
+            <li className="flex cursor-pointer items-center justify-center rounded-[50%] bg-primary-400 p-2 transition-all hover:opacity-80 active:scale-105">
+              <Link href="https://twitter.com/WHInterGroup">
+                <RiTwitterLine />
+              </Link>
+            </li>
+            <li className="flex cursor-pointer items-center justify-center rounded-[50%] bg-primary-400 p-2 transition-all hover:opacity-80 active:scale-105">
+              <Link href="https://www.facebook.com/Wh.international.group">
+                <RiFacebookLine />
+              </Link>
+            </li>
+
+            <li className="flex cursor-pointer items-center justify-center rounded-[50%] bg-primary-400 p-2 transition-all hover:opacity-80 active:scale-105">
+              <Link href="https://www.youtube.com/channel/UC7EKx44xbeWN-m3tkH0dsBw">
+                <RiYoutubeLine />
+              </Link>
+            </li>
+          </ul>
         </div>
-        <div class="-mb-10 mt-10 flex flex-grow flex-wrap text-center md:mt-0 md:pl-20 md:text-left">
-          <div class="w-full px-4 md:w-1/2 lg:w-1/4">
-            <h2 class="title-font mb-3 text-sm font-medium tracking-widest text-white">CATEGORIES</h2>
-            <nav class="mb-10 list-none">
-              <li>
-                <Link href="#" class="text-white hover:opacity-80">
-                  First Link
-                </Link>
-              </li>
-              <li>
-                <Link href="#" class="text-white hover:opacity-80">
-                  Second Link
-                </Link>
-              </li>
-              <li>
-                <Link href="#" class="text-white hover:opacity-80">
-                  Third Link
-                </Link>
-              </li>
-              <li>
-                <Link href="#" class="text-white hover:opacity-80">
-                  Fourth Link
-                </Link>
-              </li>
-            </nav>
+        <div className="flex flex-col gap-4 text-xl">
+          <div className="flex justify-center gap-2 lg:justify-start">
+            <RiMapPinLine className="shrink-0 text-2xl text-primary-400" />
+            <Link
+              href="https://www.google.com/maps/search/++++++++++++++%C4%B0STANBUL+TENS%C4%B0LC%C4%B0L%C4%B0%C4%9E%C4%B0,+AKROS+%C4%B0STANBUL,%26nbsp;BARBAROS+HAYRET%C4%B0NPA%C5%9EA+MAH%C3%87+1995+SK.+NO:1-3+KAT+32,+DAIRE:+489+++++++++++++++ESENYURT%2F%C4%B0STANBUL/@41.0158375,28.6398998,17z/data=!3m1!4b1"
+              rel="noopener noreferrer"
+              target="_blank"
+              className="max-w-[30rem] transition-all hover:text-primary-400"
+            >
+              İSTANBUL TENSİLCİLİĞİ, AKROS İSTANBUL,&nbsp;BARBAROS HAYRETİNPAŞA MAHÇ 1995 SK. NO:1-3 KAT 32, DAIRE: 489
+              ESENYURT/İSTANBUL
+            </Link>
           </div>
-          <div class="w-full px-4 md:w-1/2 lg:w-1/4">
-            <h2 class="title-font mb-3 text-sm font-medium tracking-widest text-white">CATEGORIES</h2>
-            <nav class="mb-10 list-none">
-              <li>
-                <Link href="#" class="text-white hover:opacity-80">
-                  First Link
-                </Link>
-              </li>
-              <li>
-                <Link href="#" class="text-white hover:opacity-80">
-                  Second Link
-                </Link>
-              </li>
-              <li>
-                <Link href="#" class="text-white hover:opacity-80">
-                  Third Link
-                </Link>
-              </li>
-              <li>
-                <Link href="#" class="text-white hover:opacity-80">
-                  Fourth Link
-                </Link>
-              </li>
-            </nav>
+
+          <div className="flex justify-center gap-2 lg:justify-start">
+            <RiMapPinLine className="shrink-0 text-2xl text-primary-400" />
+            <Link
+              href="https://www.google.com/maps/place/Bas%C4%B1n+%C4%B0lan+Kurumu+MERS%C4%B0N+%C5%9EUBE+M%C3%9CD%C3%9CRL%C3%9C%C4%9E%C3%9C/@36.7866157,34.5798387,17z/data=!3m1!4b1!4m5!3m4!1s0x1527f5921cb36821:0x1dcb93d41c0958f3!8m2!3d36.7866114!4d34.5820327"
+              rel="noopener noreferrer"
+              target="_blank"
+              className="max-w-[30rem] transition-all hover:text-primary-400"
+            >
+              MERSİN TENSİLCİLİĞİ - OPTİMA İŞ MERKEZİ GÜVENEVLER MAH. 1947 SK. NO:25/1 KAT:04, DAIRE:09 YENİŞEHİR/MERSİN
+            </Link>
           </div>
-          <div class="w-full px-4 md:w-1/2 lg:w-1/4">
-            <h2 class="title-font mb-3 text-sm font-medium tracking-widest text-white">CATEGORIES</h2>
-            <nav class="mb-10 list-none">
-              <li>
-                <Link href="#" class="text-white hover:text-gray-800">
-                  First Link
-                </Link>
-              </li>
-              <li>
-                <Link href="#" class="text-white hover:text-gray-800">
-                  Second Link
-                </Link>
-              </li>
-              <li>
-                <Link href="#" class="text-white hover:text-gray-800">
-                  Third Link
-                </Link>
-              </li>
-              <li>
-                <Link href="#" class="text-white hover:text-gray-800">
-                  Fourth Link
-                </Link>
-              </li>
-            </nav>
+          <div className="flex justify-center gap-2 lg:justify-start">
+            <RiMailSendLine className="shrink-0 text-2xl text-primary-400" />
+            <Link
+              href="mailto:contact@mail.com"
+              rel="noopener noreferrer"
+              target="_blank"
+              className="transition-all hover:text-primary-400"
+            >
+              contact@mail.com
+            </Link>
           </div>
-          <div class="w-full px-4 md:w-1/2 lg:w-1/4">
-            <h2 class="title-font mb-3 text-sm font-medium tracking-widest text-white">CATEGORIES</h2>
-            <nav class="mb-10 list-none">
-              <li>
-                <Link href="#" class="text-white hover:text-gray-800">
-                  First Link
-                </Link>
-              </li>
-              <li>
-                <Link href="#" class="text-white hover:text-gray-800">
-                  Second Link
-                </Link>
-              </li>
-              <li>
-                <Link href="#" class="text-white hover:text-gray-800">
-                  Third Link
-                </Link>
-              </li>
-              <li>
-                <Link href="#" class="text-white hover:text-gray-800">
-                  Fourth Link
-                </Link>
-              </li>
-            </nav>
+          <div className="flex justify-center gap-2 lg:justify-start">
+            <RiPhoneLine className="shrink-0 text-2xl text-primary-400" />
+            <span dir="ltr">+905550999908</span>
           </div>
         </div>
+
+        <ul className="flex flex-col gap-4 text-xl">
+          {NAV_ITEMS.map((link, index) => {
+            if (link.href)
+              return (
+                <li key={index}>
+                  <Link key={index} href={link.href} className="text-primary-400 transition-all hover:opacity-80">
+                    {router.locale === "ar" ? link.titleAr : link.titleEn}
+                  </Link>
+                </li>
+              );
+          })}
+        </ul>
       </div>
-      <div class="my-container bg-secondary-400">
-        <div class=" mx-auto flex flex-col flex-wrap py-4 px-5 sm:flex-row">
-          <p class="text-center text-sm text-white sm:text-left">
-            © {new Date().getFullYear()} WH Internation —
-            <Link href="#" rel="noopener noreferrer" class="ml-1 text-white" target="_blank">
-              @wh
-            </Link>
-          </p>
-          <span class="mt-2 inline-flex justify-center sm:ml-auto sm:mt-0 sm:justify-start">
-            <Link href="#" class="text-white">
-              <svg
-                fill="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                class="h-5 w-5"
-                viewBox="0 0 24 24"
-              >
-                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-              </svg>
-            </Link>
-            <Link href="#" class="ml-3 text-white">
-              <svg
-                fill="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                class="h-5 w-5"
-                viewBox="0 0 24 24"
-              >
-                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-              </svg>
-            </Link>
-            <Link href="#" class="ml-3 text-white">
-              <svg
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                class="h-5 w-5"
-                viewBox="0 0 24 24"
-              >
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-              </svg>
-            </Link>
-            <Link href="#" class="ml-3 text-white">
-              <svg
-                fill="currentColor"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="0"
-                class="h-5 w-5"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="none"
-                  d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
-                ></path>
-                <circle cx="4" cy="4" r="2" stroke="none"></circle>
-              </svg>
-            </Link>
-          </span>
-        </div>
+      <div className="my-container bg-secondary-400">
+        <p dir="ltr" className="py-2 text-center text-sm text-white">
+          © {new Date().getFullYear()} wh-international.group{" "}
+        </p>
       </div>
     </footer>
   );

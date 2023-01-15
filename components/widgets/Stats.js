@@ -7,8 +7,15 @@ import { MdOutlineEventNote } from "react-icons/md";
 const Stats = () => {
   const { t } = useTranslation("stats");
   return (
-    <section className="my-container">
-      <div className=" f-ai-c flex-wrap items-center justify-center gap-4 lg:justify-between">
+    <section className="my-8 bg-secondary-400 text-white md:my-10 lg:my-16">
+      <div
+        className="my-container justify-center py-10 lg:justify-between"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+          gap: "1rem",
+        }}
+      >
         <Item number={100} title={t("stats1")} Icon={FiMap} symbol="+" />
         <Item number={200} title={t("stats2")} Icon={BsPeople} symbol="+" />
         <Item number={500} title={t("stats3")} Icon={BsAward} symbol="+" />
@@ -38,13 +45,7 @@ const Item = ({ number, title, symbol, Icon }) => {
         className={"f-ai-c item flex-1 flex-col justify-center rounded-xl border-2 border-primary-400 p-10 shadow-lg"}
       >
         <Icon className="text-5xl" />
-        <div
-          style={{
-            fontSize: "2.4rem",
-            fontWeight: 600,
-          }}
-          className="f-ai-c mt-1 gap-1"
-        >
+        <div className="f-ai-c mt-1 gap-1 text-3xl font-semibold lg:text-4xl">
           <AnimatedNumber
             value={n}
             formatValue={(n) => n.toFixed(0)}
@@ -55,7 +56,7 @@ const Item = ({ number, title, symbol, Icon }) => {
         </div>
 
         <p
-          className="text-light -mt-1 text-center font-medium tracking-wide"
+          className="text-light text-center font-medium tracking-wide"
           style={{
             fontSize: " 140%",
           }}
@@ -63,11 +64,6 @@ const Item = ({ number, title, symbol, Icon }) => {
           {title}
         </p>
       </div>
-      <style jsx>{`
-        .viewport-block {
-          display: none;
-        }
-      `}</style>
     </>
   );
 };
